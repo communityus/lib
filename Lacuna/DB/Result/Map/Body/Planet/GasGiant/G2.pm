@@ -1,19 +1,20 @@
-package Lacuna::DB::Body::Planet::GasGiant::G2;
+package Lacuna::DB::Result::Map::Body::Planet::GasGiant::G2;
 
 use Moose;
-extends 'Lacuna::DB::Body::Planet::GasGiant';
+no warnings qw(uninitialized);
+extends 'Lacuna::DB::Result::Map::Body::Planet::GasGiant';
 
-has '+image' => (
-    default => 'pg2';
-);
+use constant image => 'pg2';
 
-has '+minerals' => (
-    default => sub { {
-        gold    => 10,
-    }},
-);
+
+
+use constant galena => 14000;
+
+use constant bauxite => 4000;
+
+use constant goethite => 2000;
 
 
 no Moose;
-__PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable(inline_constructor => 0);
 

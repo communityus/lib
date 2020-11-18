@@ -1,23 +1,29 @@
-package Lacuna::DB::Body::Planet::P8;
+package Lacuna::DB::Result::Map::Body::Planet::P8;
 
 use Moose;
-extends 'Lacuna::DB::Body::Planet';
+no warnings qw(uninitialized);
+extends 'Lacuna::DB::Result::Map::Body::Planet';
 
-has '+minerals' => (
-    default => sub { {
-        gold    => 10,
-    }},
-);
+use constant image => 'p8';
 
-has '+image' => (
-    default => 'p8';
-);
+use constant water => 5100;
 
-has '+water' => (
-    default => 1100;
-);
+# resource concentrations
 
+use constant halite => 1300;
+
+use constant gypsum => 1250;
+
+use constant trona => 1250;
+
+use constant sulfur => 1;
+
+use constant methane => 1;
+
+use constant kerogen => 3100;
+
+use constant anthracite => 3100;
 
 no Moose;
-__PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable(inline_constructor => 0);
 

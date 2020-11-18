@@ -1,21 +1,42 @@
-package Lacuna::DB::Star;
+package Lacuna::DB::Result::Map::Star;
 
 use Moose;
-extends 'SimpleDB::Class::Item';
+no warnings qw(uninitialized);
+extends 'Lacuna::DB::Result::Map';
+use Lacuna::Util;
 
-__PACKAGE__->set_domain_name('star');
-__PACKAGE__->add_attributes(
-    name            => { isa => 'Str' },
-    is_named        => { isa => 'Str', default => 0 },
-    date_created    => { isa => 'DateTime' },
-    probed_by       => { isa => 'Str' },
-    color           => { isa => 'Str' },
-    x               => { isa => 'Int' },
-    y               => { isa => 'Int' },
-    z               => { isa => 'Int' },
+__PACKAGE__->table('star');
+__PACKAGE__->add_columns(
+    color                   => { data_type => 'varchar', size => 7, is_nullable => 0 },
 );
 
-__PACKAGE__->has_many('bodies', 'Lacuna::DB::Body', 'star_id');
+__PACKAGE__->has_many('bodies', 'Lacuna::DB::Result::Map::Body', 'star_id');
+
+
+sub get_status {
+    my ($self, $empire) = @_;
+    my $out = {
+        color       => $self->color,
+        name        => $self->name,
+        id          => $self->id,
+        x           => $self->x,
+        y           => $self->y,
+    };
+    if (defined $empire) {
+        if ($self->id ~~ $empire->probed_stars) {
+            my @orbits;
+            my $bodies = $self->bodies;
+            while (my $body = $bodies->next) {
+                push @orbits, $body->get_status($empire);
+            }
+            $out->{bodies} = \@orbits;
+        }
+    }
+    return $out;
+}
+
+
+
 
 no Moose;
-__PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable(inline_constructor => 0);

@@ -1,23 +1,30 @@
-package Lacuna::DB::Body::Planet::P4;
+package Lacuna::DB::Result::Map::Body::Planet::P4;
 
 use Moose;
-extends 'Lacuna::DB::Body::Planet';
+no warnings qw(uninitialized);
+extends 'Lacuna::DB::Result::Map::Body::Planet';
 
-has '+minerals' => (
-    default => sub { {
-        gold    => 1410,
-    }},
-);
+use constant image => 'p4';
 
-has '+image' => (
-    default => 'p4';
-);
+use constant water => 8888;
 
-has '+water' => (
-    default => 800;
-);
+# resource concentrations
+
+use constant chalcopyrite => 1000;
+
+use constant uraninite => 1500;
+
+use constant goethite => 1500;
+
+use constant gypsum => 1500;
+
+use constant sulfur => 1500;
+
+use constant kerogen => 1500;
+
+use constant magnetite => 1500;
 
 
 no Moose;
-__PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable(inline_constructor => 0);
 

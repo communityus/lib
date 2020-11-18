@@ -1,23 +1,28 @@
-package Lacuna::DB::Body::Planet::P13;
+package Lacuna::DB::Result::Map::Body::Planet::P13;
 
 use Moose;
-extends 'Lacuna::DB::Body::Planet';
+no warnings qw(uninitialized);
+extends 'Lacuna::DB::Result::Map::Body::Planet';
 
-has '+minerals' => (
-    default => sub { {
-        gold    => 10,
-    }},
-);
 
-has '+image' => (
-    default => 'p13';
-);
+use constant image => 'p13';
 
-has '+water' => (
-    default => 3800;
-);
+use constant water => 8300;
+
+# resource concentrations
+use constant rutile => 2100;
+
+use constant chromite => 1400;
+
+use constant chalcopyrite => 1300;
+
+use constant galena => 2200;
+
+use constant kerogen => 1500;
+
+use constant anthracite => 1500;
 
 
 no Moose;
-__PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable(inline_constructor => 0);
 

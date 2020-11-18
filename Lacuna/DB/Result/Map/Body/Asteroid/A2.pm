@@ -1,13 +1,17 @@
-package Lacuna::DB::Body::Asteroid::A2;
+package Lacuna::DB::Result::Map::Body::Asteroid::A2;
 
 use Moose;
-extends 'Lacuna::DB::Body::Asteroid';
+no warnings qw(uninitialized);
+extends 'Lacuna::DB::Result::Map::Body::Asteroid';
 
-has '+image' => (
-    default => 'a2';
-);
+use constant image => 'a2';
 
+use constant beryl => 4000;
+
+use constant zircon => 1000;
+
+use constant chalcopyrite => 5000;
 
 no Moose;
-__PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable(inline_constructor => 0);
 

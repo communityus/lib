@@ -1,23 +1,26 @@
-package Lacuna::DB::Body::Planet::P7;
+package Lacuna::DB::Result::Map::Body::Planet::P7;
 
 use Moose;
-extends 'Lacuna::DB::Body::Planet';
+no warnings qw(uninitialized);
+extends 'Lacuna::DB::Result::Map::Body::Planet';
 
-has '+minerals' => (
-    default => sub { {
-        gold    => 10,
-    }},
-);
+use constant image => 'p7';
 
-has '+image' => (
-    default => 'p7';
-);
+use constant water => 5700;
 
-has '+water' => (
-    default => 4700;
-);
+# resource concentrations
+
+use constant chalcopyrite => 2800;
+
+use constant bauxite => 1700;
+
+use constant goethite => 2400;
+
+use constant gypsum => 2100;
+
+use constant beryl => 1000;
 
 
 no Moose;
-__PACKAGE__->meta->make_immutable;
+__PACKAGE__->meta->make_immutable(inline_constructor => 0);
 
